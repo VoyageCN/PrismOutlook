@@ -1,0 +1,17 @@
+﻿<ig:RibbonTabItem
+    x:Class="PrismOutlook.Modules.Contacts.Menus.HomeTab"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:ig="http://schemas.infragistics.com/xaml/wpf"
+    xmlns:local="clr-namespace:PrismOutlook.Modules.Contacts.Menus"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Header="Contacts">
+
+    <ig:RibbonGroup Caption="New">
+        <ig:ToolHorizontalWrapPanel>
+            <ig:ButtonTool ig:RibbonGroup.MaximumSize="ImageAndTextLarge" Caption="Button" />
+        </ig:ToolHorizontalWrapPanel>
+    </ig:RibbonGroup>
+
+</ig:RibbonTabItem>
