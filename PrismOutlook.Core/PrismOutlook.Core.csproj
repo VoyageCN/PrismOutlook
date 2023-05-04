@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Infragistics.WPF.RichTextEditor.Trial" Version="22.2.19" />
     <PackageReference Include="Infragistics.WPF.Trial" Version="22.2.19" />
     <PackageReference Include="Prism.Unity" Version="8.1.97" />
   </ItemGroup>

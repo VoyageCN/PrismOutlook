@@ -4,6 +4,7 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Infragistics.WPF.DataGrids.Trial" Version="22.2.19" />
     <PackageReference Include="Infragistics.WPF.DataTree.Trial" Version="22.2.19" />
     <PackageReference Include="Infragistics.WPF.OutlookBar.Trial" Version="22.2.19" />
     <PackageReference Include="Infragistics.WPF.Ribbon.Trial" Version="22.2.19" />
@@ -13,5 +14,20 @@
   <ItemGroup>
     <ProjectReference Include="..\..\PrismOutlook.Business\PrismOutlook.Business.csproj" />
     <ProjectReference Include="..\..\PrismOutlook.Core\PrismOutlook.Core.csproj" />
+    <ProjectReference Include="..\..\PrismOutlook.Services.Interfaces\PrismOutlook.Services.Interfaces.csproj" />
+    <ProjectReference Include="..\..\PrismOutlook.Services\PrismOutlook.Services.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

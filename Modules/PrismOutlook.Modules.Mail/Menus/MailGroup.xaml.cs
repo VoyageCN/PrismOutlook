@@ -16,6 +16,7 @@ using Infragistics.Controls.Menus;
 using Infragistics.Windows.OutlookBar;
 using PrismOutlook.Business;
 using PrismOutlook.Core;
+using PrismOutlook.Modules.Mail.ViewModels;
 
 namespace PrismOutlook.Modules.Mail.Menus
 {
@@ -27,6 +28,16 @@ namespace PrismOutlook.Modules.Mail.Menus
         public MailGroup()
         {
             InitializeComponent();
+            _dataTree.Loaded += DataTree_Loaded;
+        }
+
+        private void DataTree_Loaded(object sender, RoutedEventArgs e)
+        {
+            _dataTree.Loaded -= DataTree_Loaded;
+
+            var parentNode = _dataTree.Nodes[0];
+            var nodeToSelect = parentNode.Nodes[0];
+            nodeToSelect.IsSelected = true;
         }
 
         public string DefaultNavigationPath
@@ -36,7 +47,7 @@ namespace PrismOutlook.Modules.Mail.Menus
                 if (_dataTree.SelectionSettings.SelectedNodes[0] is XamDataTreeNode item)
                     return ((NavigationItem)item.Data).NavigationPath;
 
-                return "MailList";
+                return $"MailList?{FolderParameters.FolderKey}={FolderParameters.Inbox}";
             }
         }
     }

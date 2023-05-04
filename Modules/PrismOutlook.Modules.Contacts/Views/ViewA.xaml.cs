@@ -12,12 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PrismOutlook.Core;
+using PrismOutlook.Modules.Contacts.Menus;
 
 namespace PrismOutlook.Modules.Contacts.Views
 {
     /// <summary>
     /// Interaction logic for ViewA.xaml
     /// </summary>
+    [DependentView(RegionNames.RibbonRegion, typeof(HomeTab))]
     public partial class ViewA : UserControl
     {
         public ViewA()

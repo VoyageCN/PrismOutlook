@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using Infragistics.Themes;
 using Infragistics.Windows.OutlookBar;
 using Infragistics.Windows.Ribbon;
 using Prism.Ioc;
@@ -22,6 +24,12 @@ namespace PrismOutlook
             return Container.Resolve<MainWindow>();
         }
 
+        protected override void InitializeShell(Window shell)
+        {
+            ThemeManager.ApplicationTheme = new Office2013Theme();
+            base.InitializeShell(shell);
+        }
+
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<IApplicationCommands, ApplicationCommands>();
@@ -38,6 +46,13 @@ namespace PrismOutlook
             base.ConfigureRegionAdapterMappings(regionAdapterMappings);
             regionAdapterMappings.RegisterMapping(typeof(XamOutlookBar), Container.Resolve<XamOutlookBarRegionAdapter>());
             regionAdapterMappings.RegisterMapping(typeof(XamRibbon), Container.Resolve<XamRibbonRegionAdapter>());
+        }
+
+        protected override void ConfigureDefaultRegionBehaviors(IRegionBehaviorFactory regionBehaviors)
+        {
+            base.ConfigureDefaultRegionBehaviors(regionBehaviors);
+
+            regionBehaviors.AddIfMissing(DependentViewRegionBehavior.BehaviorKey, typeof(DependentViewRegionBehavior));
         }
     }
 }

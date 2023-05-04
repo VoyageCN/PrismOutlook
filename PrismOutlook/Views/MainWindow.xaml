@@ -6,8 +6,8 @@
     xmlns:ig="http://schemas.infragistics.com/xaml/wpf"
     xmlns:prism="http://prismlibrary.com/"
     Title="{Binding Title}"
-    Width="525"
-    Height="350"
+    Width="1080"
+    Height="720"
     prism:ViewModelLocator.AutoWireViewModel="True">
 
     <ig:RibbonWindowContentHost>

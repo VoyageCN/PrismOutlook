@@ -19,7 +19,7 @@
             <ig:XamDataTree.GlobalNodeLayouts>
                 <ig:NodeLayout
                     Key="GlobalLayout"
-                    DisplayMemberPath="Caption"
+                    DisplayMemberPath="Caption" IsExpandedMemberPath="IsExpanded"
                     TargetTypeName="NavigationItem" />
             </ig:XamDataTree.GlobalNodeLayouts>
         </ig:XamDataTree>
