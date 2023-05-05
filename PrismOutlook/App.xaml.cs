@@ -7,9 +7,11 @@ using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
 using PrismOutlook.Core;
+using PrismOutlook.Core.Dialogs;
 using PrismOutlook.Core.Regions;
 using PrismOutlook.Modules.Contacts;
 using PrismOutlook.Modules.Mail;
+using PrismOutlook.ViewModels;
 using PrismOutlook.Views;
 
 namespace PrismOutlook
@@ -33,6 +35,10 @@ namespace PrismOutlook
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<IApplicationCommands, ApplicationCommands>();
+
+            containerRegistry.RegisterSingleton<IRegionDialogService, RegionDialogService>();
+
+            containerRegistry.RegisterDialog<ErrorDialog, ErrorDialogViewModel>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

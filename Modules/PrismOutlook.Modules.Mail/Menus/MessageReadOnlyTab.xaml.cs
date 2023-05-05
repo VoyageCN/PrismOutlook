@@ -12,20 +12,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Infragistics.Windows.Ribbon;
 using PrismOutlook.Core;
 
 namespace PrismOutlook.Modules.Mail.Menus
 {
     /// <summary>
-    /// HomeTab.xaml 的交互逻辑
+    /// MessageReadOnlyTab.xaml 的交互逻辑
     /// </summary>
-    public partial class HomeTab : RibbonTabItem, ISupportDataContext
+    public partial class MessageReadOnlyTab : ISupportDataContext
     {
-        public HomeTab()
+        public MessageReadOnlyTab()
         {
             InitializeComponent();
-            SetResourceReference(StyleProperty, typeof(RibbonTabItem));
         }
     }
 }

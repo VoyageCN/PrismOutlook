@@ -52,5 +52,10 @@ namespace PrismOutlook.Business
             get { return _dateSent; }
             set { SetProperty(ref _dateSent, value); }
         }
+
+        public MailMessage()
+        {
+            Id = new Random().Next(10, 6000);
+        }
     }
 }

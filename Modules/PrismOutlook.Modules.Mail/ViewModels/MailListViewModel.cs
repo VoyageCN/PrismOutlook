@@ -1,27 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Regions;
+using Prism.Services.Dialogs;
 using PrismOutlook.Business;
 using PrismOutlook.Core;
 using PrismOutlook.Services.Interfaces;
 
 namespace PrismOutlook.Modules.Mail.ViewModels
 {
-    public class MailListViewModel : ViewModelBase
+    public class MailListViewModel : MessageViewModelBase
     {
-        private string _title;
-        public string Title
-        {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
-        }
-
         private ObservableCollection<MailMessage> _messages;
-        private readonly IMailService _mailService;
+        private string _currentFolder = FolderParameters.Inbox;
 
         public ObservableCollection<MailMessage> Messages
         {
@@ -29,38 +21,100 @@ namespace PrismOutlook.Modules.Mail.ViewModels
             set { SetProperty(ref _messages, value); }
         }
 
-        private MailMessage _selectedMessage;
-        public MailMessage SelectedMessage
+        private DelegateCommand _newMessageCommand;
+        public DelegateCommand NewMessageCommand =>
+            _newMessageCommand ?? (_newMessageCommand = new DelegateCommand(ExecuteNewMessageCommand));
+
+        private DelegateCommand _throwExceptionCommand;
+        private readonly IDialogService _dialogService;
+
+        public DelegateCommand ThrowExceptionCommand =>
+            _throwExceptionCommand ?? (_throwExceptionCommand = new DelegateCommand(ExecuteThrowExceptionCommand));
+
+        public MailListViewModel(IMailService mailService, IRegionDialogService regionDialogService, IDialogService dialogService)
+            : base(mailService, regionDialogService)
         {
-            get { return _selectedMessage; }
-            set { SetProperty(ref _selectedMessage, value); }
+            _dialogService = dialogService;
         }
 
-        public MailListViewModel(IMailService mailService)
+        void ExecuteNewMessageCommand()
         {
-            _mailService = mailService;
+            var parameters = new DialogParameters
+            {
+                { "id", 0 },
+                { MailParameters.MessageMode, MessageMode.New }
+            };
+
+            RegionDialogService.Show("MessageView", parameters, (result) =>
+            {
+                if (_currentFolder == FolderParameters.Sent)
+                    Messages.Add(result.Parameters.GetValue<MailMessage>("messageSent"));
+            });
+        }
+
+        void ExecuteThrowExceptionCommand()
+        {
+            try
+            {
+                throw new Exception("This is an exception that was throw in code.");
+            }
+            catch (Exception ex)
+            {
+                var parameters = new DialogParameters()
+                {
+                    { "message", ex.Message }
+                };
+
+                _dialogService.ShowDialog("ErrorDialog", parameters, (result) =>
+                {
+                    //TODO: handle callback if needed
+                });
+            }
+        }
+
+        protected override void ExecuteDeleteMessage()
+        {
+            base.ExecuteDeleteMessage();
+            Messages.Remove(Message);
+        }
+
+        protected override void HandleMessageCallback(IDialogResult result)
+        {
+            var mode = result.Parameters.GetValue<MessageMode>(MailParameters.MessageMode);
+            if (mode == MessageMode.Delete)
+            {
+                var messageId = result.Parameters.GetValue<int>(MailParameters.MessageId);
+
+                var messageToDelete = Messages.Where(x => x.Id == messageId).FirstOrDefault();
+                if (messageToDelete != null)
+                    Messages.Remove(messageToDelete);
+            }
         }
 
         public override void OnNavigatedTo(NavigationContext navigationContext)
         {
-            var folder = navigationContext.Parameters.GetValue<string>(FolderParameters.FolderKey);
+            _currentFolder = navigationContext.Parameters.GetValue<string>(FolderParameters.FolderKey);
+            LoadMessages(_currentFolder);
+        }
 
+        void LoadMessages(string folder)
+        {
             switch (folder)
             {
                 case FolderParameters.Inbox:
-                    Messages = new ObservableCollection<MailMessage>(_mailService.GetInboxItems());
+                    Messages = new ObservableCollection<MailMessage>(MailService.GetInboxItems());
                     break;
                 case FolderParameters.Deleted:
-                    Messages = new ObservableCollection<MailMessage>(_mailService.GetDeletedItems());
+                    Messages = new ObservableCollection<MailMessage>(MailService.GetDeletedItems());
                     break;
                 case FolderParameters.Sent:
-                    Messages = new ObservableCollection<MailMessage>(_mailService.GetSentItems());
+                    Messages = new ObservableCollection<MailMessage>(MailService.GetSentItems());
                     break;
                 default:
-                    Messages = new ObservableCollection<MailMessage>(_mailService.GetInboxItems());
+                    Messages = new ObservableCollection<MailMessage>(MailService.GetInboxItems());
                     break;
             }
-            
+            Message = Messages.FirstOrDefault();
         }
     }
 }

@@ -61,5 +61,47 @@ namespace PrismOutlook.Services
             return DeletedItems;
         }
 
+        public MailMessage GetMessage(int id)
+        {
+           var messages = new List<MailMessage>();
+            messages.AddRange(InboxItems);
+            messages.AddRange(SentItems);
+            messages.AddRange(DeletedItems);
+            return messages.FirstOrDefault(m => m.Id == id);
+        }
+
+        public void DeleteMessage(int id)
+        {
+            var messages = new List<MailMessage>();
+            var message = DeletedItems.FirstOrDefault(m => m.Id == id);
+            if (message != null)
+            {
+                DeletedItems.Remove(message);
+                return;
+            }
+
+            message = InboxItems.FirstOrDefault(m => m.Id == id);
+            if (message != null)
+            {
+                InboxItems.Remove(message);
+            }
+            else
+            {
+                message = SentItems.FirstOrDefault(m => m.Id == id);
+                if (message != null)
+                    SentItems.Remove(message);
+            }
+
+            if (message != null)
+            {
+                DeletedItems.Add(message);
+            }
+        }
+
+        public void SendMessage(MailMessage message)
+        {
+            message.DateSent = DateTime.Now;
+            SentItems.Add(message);
+        }
     }
 }
