@@ -37,7 +37,7 @@ namespace PrismOutlook.Modules.Mail.Menus
             get { return _richTextEditor; }
             set
             {
-                if (_richTextEditor == null)
+                if (_richTextEditor != null)
                 {
                     _richTextEditor.Loaded += RichTextEditor_Loaded;
                     _richTextEditor.SelectionChanged -= RichTextEditor_SelectionChanged;

@@ -28,6 +28,7 @@ namespace PrismOutlook.Modules.Mail.Menus
         public MailGroup()
         {
             InitializeComponent();
+
             _dataTree.Loaded += DataTree_Loaded;
         }
 

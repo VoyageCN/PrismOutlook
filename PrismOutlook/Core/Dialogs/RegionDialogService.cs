@@ -52,7 +52,15 @@ namespace PrismOutlook.Core.Dialogs
             };
             window.Closing += closingHandler;
 
-            RoutedEventHandler closedHandler = null;
+            RoutedEventHandler loadedHandler = null;
+            loadedHandler = (o, e) =>
+            {
+                window.Loaded -= loadedHandler;
+                dialogAware.RequestClose += requestCloseHandler;
+            };
+            window.Loaded += loadedHandler;
+
+            EventHandler closedHandler = null;
             closedHandler = (o, e) =>
             {
                 window.Closed -= closedHandler;

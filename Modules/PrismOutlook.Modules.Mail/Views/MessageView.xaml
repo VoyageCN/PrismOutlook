@@ -59,7 +59,7 @@
                 Grid.Column="2"
                 Margin="2"
                 VerticalAlignment="Center"
-                Text="{Binding Message.CC, Converter={StaticResource MailAddressConverter}}" />
+                Text="{Binding Message.To, Converter={StaticResource MailAddressConverter}}" />
 
             <TextBlock
                 Grid.Row="2"
@@ -90,7 +90,7 @@
                 Text="{Binding Message.Subject, Converter={StaticResource MailAddressConverter}}" />
         </Grid>
 
-        <ig:RtfDocumentAdapter Document="{Binding Document}" />
+        <ig:RtfDocumentAdapter Document="{Binding Document, ElementName=_rte}" Value="{Binding Message.Body}" />
         <ig:XamRichTextEditor
             x:Name="_rte"
             Grid.Row="1"

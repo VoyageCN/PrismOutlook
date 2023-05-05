@@ -11,18 +11,17 @@
             Caption="New Email"
             Command="{Binding NewMessageCommand}"
             CommandParameter="New"
-            LargeImage="/PrismOutlook/Modules/Mail;component/Images/NewMailMessage32.png"
-            SmallImage="/PrismOutlook/Modules/Mail;component/Images/NewMailMessage16.png" />
+            LargeImage="/PrismOutlook.Modules.Mail;component/Images/NewMailMessage32.png"
+            SmallImage="/PrismOutlook.Modules.Mail;component/Images/NewMailMessage16.png" />
     </ig:RibbonGroup>
 
     <ig:RibbonGroup Caption="Delete">
         <ig:ButtonTool
             ig:RibbonGroup.MaximumSize="ImageAndTextLarge"
             Caption="Delete"
-            Command="{Binding NewMessageCommand}"
-            CommandParameter="Delete"
-            LargeImage="/PrismOutlook/Modules/Mail;component/Images/Delete32.png"
-            SmallImage="/PrismOutlook/Modules/Mail;component/Images/Delete16.png" />
+            Command="{Binding DeleteMessageCommand}"
+            LargeImage="/PrismOutlook.Modules.Mail;component/Images/Delete32.png"
+            SmallImage="/PrismOutlook.Modules.Mail;component/Images/Delete16.png" />
     </ig:RibbonGroup>
 
     <ig:RibbonGroup Caption="Respond">

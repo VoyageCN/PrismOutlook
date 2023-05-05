@@ -47,7 +47,6 @@ namespace PrismOutlook.Modules.Mail.ViewModels
             root.Items.Add(new NavigationItem() { Caption = Properties.Resources.Folder_Sent, NavigationPath = GenerateNavigationPath(FolderParameters.Sent) });
 
             Items.Add(root);
-
         }
 
         string GenerateNavigationPath(string folder)

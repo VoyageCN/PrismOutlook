@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PrismOutlook.Business;
+using PrismOutlook.Services.Data;
 using PrismOutlook.Services.Interfaces;
 
 namespace PrismOutlook.Services
@@ -19,7 +20,7 @@ namespace PrismOutlook.Services
                 From = @"blagunas@infragistics.com",
                 To = new ObservableCollection<string>(){ "jane@doe.com", "john@doe.com" },
                 Subject = "This is a test email1",
-                Body = "This is the body of an email1",
+                Body = Resources.DavidSmit_SampleCoverLetterEmail,
                 DateSent = DateTime.Now,
             },
             new MailMessage
@@ -28,7 +29,7 @@ namespace PrismOutlook.Services
                 From = @"blagunas@infragistics.com",
                 To = new ObservableCollection<string>(){ "jane@doe.com", "john@doe.com" },
                 Subject = "This is a test email2",
-                Body = "This is the body of an email2",
+                Body = Resources.Barbara_Bailey_RE_GraphicDesignerCoverLetter,
                 DateSent = DateTime.Now.AddDays(-1),
             },
             new MailMessage
@@ -37,7 +38,7 @@ namespace PrismOutlook.Services
                 From = @"blagunas@infragistics.com",
                 To = new ObservableCollection<string>(){ "jane@doe.com", "john@doe.com" },
                 Subject = "This is a test email3",
-                Body = "This is the body of an email3",
+                Body = Resources.MargaretJones_RE_GraphicDesignerCoverLetter,
                 DateSent = DateTime.Now.AddDays(-5),
             },
         };

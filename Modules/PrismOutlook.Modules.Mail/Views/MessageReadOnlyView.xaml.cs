@@ -1,24 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows.Controls;
+using PrismOutlook.Core;
+using PrismOutlook.Modules.Mail.Menus;
 
 namespace PrismOutlook.Modules.Mail.Views
 {
     /// <summary>
     /// MessageReadOnlyView.xaml 的交互逻辑
     /// </summary>
-    public partial class MessageReadOnlyView : UserControl
+    [DependentView(RegionNames.RibbonRegion, typeof(MessageReadOnlyTab))]
+    public partial class MessageReadOnlyView : UserControl, ISupportDataContext
     {
         public MessageReadOnlyView()
         {
